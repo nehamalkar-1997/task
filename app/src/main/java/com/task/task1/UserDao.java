@@ -1,5 +1,7 @@
 package com.task.task1;
 
+import android.graphics.Bitmap;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -29,4 +31,7 @@ public interface UserDao {
 
     @Query("select * from user where id like :id")
     UserEntity getUser(int id);
+
+    @Query("select capturedImg from user where id= :id")
+    Bitmap getBitmap(int id);
 }

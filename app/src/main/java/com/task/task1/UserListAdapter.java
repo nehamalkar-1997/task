@@ -7,12 +7,16 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Delete;
 
 
 import java.util.List;
@@ -24,35 +28,30 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
    UserDatabase userDatabase;
 
     List<UserEntity> list;
-    List <UserEntity>templist;
+    List <UserEntity> tempList;
    public UserListAdapter(Context context,List<UserEntity> list) {
        this.context = context;
        this.list=list;
-       templist=list;
+       tempList=list;
        userDatabase=UserDatabase.getInstance(context);
    }
-
-
     @Override
     public UserListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.recycler_row,parent, false);
-
         return new MyViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder( UserListAdapter.MyViewHolder holder, int position) {
-         // holder.tvName.setText(this.userEntityList.get(position).name);
         UserEntity ob=list.get(position);
-        holder.Name.setText(ob.getName1());
-        holder.Email.setText(ob.getEmail());
-        holder.Password.setText(ob.getPassword());
-
-
-
+        holder.name.setText(ob.getName1());
+        holder.email.setText(ob.getEmail());
+        holder.password.setText(ob.getPassword());
 
     }
-
+   public void filterList(List<UserEntity> filterList){
+       list= filterList;
+       notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
@@ -60,20 +59,24 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView Name,Email, Password;
-      ImageButton Edit,Delete;
+        TextView name,email, password;
+        EditText searchBar;
+        ImageView profile;
+        ImageButton edit,delete;
+
 
 
         public  MyViewHolder(View view){
             super(view);
-            Name =view.findViewById(R.id.tvName);
-            Email =view.findViewById(R.id.tvEmail);
-            Password =view.findViewById(R.id.tvPassword);
-            Edit = view.findViewById(R.id.btnEdit);
-            Delete =view.findViewById(R.id.btnDelete);
+            name =view.findViewById(R.id.tvName);
+            email =view.findViewById(R.id.tvEmail);
+            profile=view.findViewById(R.id.iVProfile);
+            password =view.findViewById(R.id.tvPassword);
+            edit = view.findViewById(R.id.btnEdit);
+            delete =view.findViewById(R.id.btnDelete);
+            searchBar= view.findViewById(R.id.search_bar);
 
-            
-          Delete.setOnClickListener(new View.OnClickListener() {
+          delete.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
                   int no = getAdapterPosition();
@@ -95,18 +98,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
                   }).start();
               }
           });
-         /*   btn.OnClickListener
-            {
-            int no=getAdapterpostion();
-         Userentity ob=   list.get(no);
-        thred{
-      // Usertntiy ob1= usedatabase.getdao.getuser(ob.getid());
-             usedatabase.getdao.deleteuser(ob1);
 
-        }
-
-            }*/
-         Edit.setOnClickListener(new View.OnClickListener() {
+         edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int no= getAdapterPosition();
@@ -120,31 +113,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
                             ob1.setName1(ob1.name1);
                             ob1.setEmail(ob1.email);
                             userDatabase.getDao().updateUser(ob1);
-
                         }
                     }).start();
                 }
             });
-
-            /*
-            btn.setonclic{
-             int no=getAdapterpostion();
-         Userentity ob=   list.get(no);
-        thred{
-      // Usertntiy ob1= usedatabase.getdao.getuser(ob.getid());
-            ob1.setPassword
-            ob1.setName
-            ob1.setEmail
-            userdatabase.getdao.updateuser(ob1)
-
-
-
-            }
-            */
-
-
-
-
         }
     }
 }

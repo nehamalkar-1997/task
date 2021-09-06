@@ -9,13 +9,13 @@ import java.io.ByteArrayOutputStream;
 
 public class BitmapConvertor {
 
-  /*  @TypeConverter
+   @TypeConverter
     public byte[] BitmapToBytes(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 60, outputStream);
         byte bytes[];
         bytes = outputStream.toByteArray();
-
+ 
         return bytes;
     }
 
@@ -23,7 +23,7 @@ public class BitmapConvertor {
     public Bitmap byteToBitmap(byte[] bytes) {
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         return bitmap;
-    }*/
+    }
 }
 
 

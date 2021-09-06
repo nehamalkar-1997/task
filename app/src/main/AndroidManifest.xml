@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.task.task1">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Task1">
-        <activity android:name=".UserList"></activity>
+        <activity android:name=".DataBinding"></activity>
+        <activity android:name=".MainActivity2" />
+        <activity android:name=".Profile" />
+        <activity android:name=".UserList" />
         <activity android:name=".SignUp" />
-        <activity android:name=".Login" />
+        <activity android:name=".LoginUser" />
         <activity android:name=".Dashboard" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -21,6 +21,7 @@ public class Dashboard extends AppCompatActivity {
     private Button bLogin;
     private Button bSingUp;
     private Button bUserList;
+    private Button bRetrofit;
 
 
 
@@ -35,12 +36,12 @@ public class Dashboard extends AppCompatActivity {
         bLogin = findViewById(R.id.bLogin);
         bSingUp = findViewById(R.id.bSignup);
         bUserList = findViewById(R.id.bUserList);
-
+        bRetrofit = findViewById(R.id.bRetrofit);
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,Login.class);
+                Intent intent = new Intent(Dashboard.this,LoginUser.class);
                 startActivity(intent);
             }
         });
@@ -56,6 +57,22 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this,UserList.class);
+                startActivity(intent);
+            }
+        });
+
+        bRetrofit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this,MainActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+        bRetrofit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this,User.class);
                 startActivity(intent);
             }
         });

@@ -2,10 +2,14 @@ package com.task.task1;
 
 import android.graphics.Bitmap;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import androidx.databinding.BindingAdapter;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.bumptech.glide.Glide;
 
 @Entity(tableName = "user")
   public class UserEntity {
@@ -19,16 +23,27 @@ import androidx.room.PrimaryKey;
     @ColumnInfo(name = "name")
     String name1;
 
-  //  @ColumnInfo(name = "captured_img")
-   // Bitmap bitmap;
+    @ColumnInfo(name = "capturedImg")
+    Bitmap bitmap;
 
     @ColumnInfo(name = "email")
     String email;
+
+
 
     public UserEntity(String password, String name1, String email) {
         this.password = password;
         this.name1 = name1;
         this.email = email;
+
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public Integer getId() {
@@ -55,8 +70,6 @@ import androidx.room.PrimaryKey;
         this.name1 = name1;
     }
 
-
-
     public String getEmail() {
         return email;
     }
@@ -64,4 +77,5 @@ import androidx.room.PrimaryKey;
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

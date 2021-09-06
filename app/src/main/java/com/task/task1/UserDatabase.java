@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-//@TypeConverters(BitmapConvertor.class)
+@TypeConverters(BitmapConvertor.class)
 @Database(entities = {UserEntity.class},version = 1)
 public abstract class UserDatabase extends RoomDatabase {
 

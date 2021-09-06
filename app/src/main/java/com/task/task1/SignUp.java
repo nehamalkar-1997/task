@@ -1,6 +1,7 @@
 package com.task.task1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +32,12 @@ import java.util.List;
 public class SignUp extends AppCompatActivity {
 
     UserDatabase userDatabase;
-    //List<UserEntity> list;
-    //ImageButton captureImg;
+    List<UserEntity> list;
+    ImageButton captureImg;
     EditText username, userEmail, userPassword, confirmPassword;
     Button btnCreateUser, btnLogin, btnDate;
     TextView date;
-    // Bitmap bitmap;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +51,14 @@ public class SignUp extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         date= findViewById(R.id.tvDate);
         btnDate = findViewById(R.id.btn_Date);
-        // captureImg = findViewById(R.id.captureImg);
+        captureImg = findViewById(R.id.captureImg);
         userDatabase = UserDatabase.getInstance(getApplicationContext());
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignUp.this, Login.class);
+                Intent intent = new Intent(SignUp.this, LoginUser.class);
                 startActivity(intent);
 
             }
@@ -67,8 +69,13 @@ public class SignUp extends AppCompatActivity {
                 handleDateButton();
             }
         });
-
-
+        captureImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
+            }
+        });
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,47 +118,16 @@ public class SignUp extends AppCompatActivity {
         },Year,Month,Date);
         datePickerDialog.show();
     }
-}
-
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1001) {
-            //  Toast.makeText(getContext(), "Select image", Toast.LENGTH_SHORT).show();
-            Uri uri = data.getData();
-            try {
-         //       bitmap = MediaStore.Images.Media.getContentUri(getActionBar().getContentResolver());
-                captureImg.setImageBitmap(bitmap);
-           // } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-       // super.onActivityResult(requestCode, resultCode, data);
-
-   /* public void signUpMethod() {
-        String userText = username.getText().toString(), emailText = email.getText().toString(), passwordText = password.getText().toString(), confirmPasswordText = confirmPassword.getText().toString();
-
-        if (userText.isEmpty() && emailText.isEmpty() && passwordText.isEmpty() && confirmPasswordText.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Fill all fields", Toast.LENGTH_LONG).show();
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (data == null) {
+            Toast.makeText(getApplicationContext(), " Select Image", Toast.LENGTH_SHORT).show();
         } else {
-            if (passwordText != (confirmPasswordText)) {
-                Toast.makeText(getApplicationContext(), "Not Match", Toast.LENGTH_SHORT).show();
-            }
-
+            bitmap = (Bitmap) data.getExtras().get("data");
+            captureImg.setImageBitmap(bitmap);
         }
-    }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}
 
 
